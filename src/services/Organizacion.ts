@@ -30,4 +30,31 @@ const deleteOrganizacion = async (organizacionId: string): Promise<IOrganizacion
     return await Organizacion.findByIdAndDelete(organizacionId);
 };
 
-export default { createOrganizacion, getOrganizacion, getAllOrganizaciones, updateOrganizacion, deleteOrganizacion };
+const getOrganizacionConUsuarios = async (organizacionId: string) => {
+    return await Organizacion.findById(organizacionId).populate('usuarios').lean();
+};
+
+const addUsuarioToOrganizacion = async (organizacionId: string | mongoose.Types.ObjectId, usuarioId: string | mongoose.Types.ObjectId) => {
+    return await Organizacion.findByIdAndUpdate(
+        organizacionId,
+        { $push: { usuarios: usuarioId } }
+    );
+};
+
+const removeUsuarioFromOrganizacion = async (organizacionId: string | mongoose.Types.ObjectId, usuarioId: string | mongoose.Types.ObjectId) => {
+    return await Organizacion.findByIdAndUpdate(
+        organizacionId,
+        { $pull: { usuarios: usuarioId } }
+    );
+};
+
+export default {
+    createOrganizacion,
+    getOrganizacion,
+    getAllOrganizaciones,
+    updateOrganizacion,
+    deleteOrganizacion,
+    getOrganizacionConUsuarios,
+    addUsuarioToOrganizacion,
+    removeUsuarioFromOrganizacion
+};

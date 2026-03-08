@@ -1,4 +1,5 @@
 # Express API — Mongoose + TypeScript In Depth
+Uso de IA (Gemini 3.1 Pro) para analizar errores y proponer soluciones.
 
 API REST construida con **Node.js**, **Express**, **TypeScript** y **Mongoose** que gestiona dos entidades principales: `Organizacion` y `Usuario`.
 

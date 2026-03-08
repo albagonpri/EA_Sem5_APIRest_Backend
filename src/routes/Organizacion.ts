@@ -155,4 +155,29 @@ router.put('/:organizacionId', ValidateJoi(Schemas.organizacion.update), control
  */
 router.delete('/:organizacionId', controller.deleteOrganizacion);
 
+/**
+ * @openapi
+ * /organizaciones/{organizacionId}/users:
+ *   get:
+ *     summary: Obtiene una organización con sus usuarios
+ *     tags: [Organizaciones]
+ *     parameters:
+ *       - in: path
+ *         name: organizacionId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ObjectId de la organización
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Organizacion'
+ *       404:
+ *         description: No encontrado
+ */
+router.get('/:organizacionId/users', controller.readOrganizacionConUsuarios);
+
 export default router;
