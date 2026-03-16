@@ -32,13 +32,29 @@ const router = express.Router();
  *           type: string
  *           description: ObjectId de la organización
  *           example: "65f1c2a1b2c3d4e5f6789013"
- *     UsuarioCreateUpdate:
+ *     UsuarioCreate:
  *       type: object
  *       required:
  *         - name
  *         - organizacion
  *         - email
  *         - password
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: "Judit"
+ *         email:
+ *           type: string
+ *           example: "judit@gmail.com"
+ *         password:
+ *           type: string
+ *           example: "password123"
+ *         organizacion:
+ *           type: string
+ *           description: ObjectId de la organización (24 hex)
+ *           example: "65f1c2a1b2c3d4e5f6789013"
+ *     UsuarioUpdate:
+ *       type: object
  *       properties:
  *         name:
  *           type: string
@@ -66,7 +82,7 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UsuarioCreateUpdate'
+ *             $ref: '#/components/schemas/UsuarioCreate'
  *     responses:
  *       201:
  *         description: Creado
@@ -126,7 +142,7 @@ router.get('/', controller.readAll);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UsuarioCreateUpdate'
+ *             $ref: '#/components/schemas/UsuarioUpdate'
  *     responses:
  *       201:
  *         description: Actualizado

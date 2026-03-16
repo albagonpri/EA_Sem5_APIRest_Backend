@@ -14,7 +14,7 @@ const UsuarioSchema: Schema = new Schema(
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
-        organizacion: { type: Schema.Types.ObjectId, required: true, ref: 'Organizacion' }
+        organizacion: { type: Schema.Types.ObjectId, required: false, ref: 'Organizacion' }
     },
     {
         timestamps: true,

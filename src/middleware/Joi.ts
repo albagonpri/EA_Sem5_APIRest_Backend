@@ -31,7 +31,8 @@ export const Schemas = {
         create: Joi.object<IUsuario>({
             organizacion: Joi.string()
                 .regex(/^[0-9a-fA-F]{24}$/)
-                .required(),
+                .allow('', null)
+                .optional(),
             name: Joi.string().required(),
             email: Joi.string().email().required(),
             password: Joi.string().min(6).required()
@@ -39,10 +40,11 @@ export const Schemas = {
         update: Joi.object<IUsuario>({
             organizacion: Joi.string()
                 .regex(/^[0-9a-fA-F]{24}$/)
-                .required(),
-            name: Joi.string().required(),
-            email: Joi.string().email().required(),
-            password: Joi.string().min(6).required()
+                .allow('', null)
+                .optional(),
+            name: Joi.string().optional(),
+            email: Joi.string().email().optional(),
+            password: Joi.string().min(6).optional()
         })
     }
 };

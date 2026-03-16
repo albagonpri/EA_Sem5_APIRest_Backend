@@ -27,10 +27,21 @@ const getAllUsuarios = async (): Promise<IUsuarioModel[]> => {
 const updateUsuario = async (usuarioId: string, data: Partial<IUsuario>): Promise<IUsuarioModel | null> => {
     const usuario = await Usuario.findById(usuarioId);
     if (usuario) {
-        if (data.organizacion && data.organizacion.toString() !== usuario.organizacion.toString()) {
+        if (data.organizacion !== undefined) {
+            const newOrg = data.organizacion ? data.organizacion.toString() : '';
+            const oldOrg = usuario.organizacion ? usuario.organizacion.toString() : '';
 
-            await OrganizacionService.removeUsuarioFromOrganizacion(usuario.organizacion, usuario._id);
-            await OrganizacionService.addUsuarioToOrganizacion(data.organizacion as string, usuario._id);
+            if (newOrg !== oldOrg) {
+                if (oldOrg !== '') {
+                    await OrganizacionService.removeUsuarioFromOrganizacion(usuario.organizacion, usuario._id);
+                }
+                if (newOrg !== '') {
+                    await OrganizacionService.addUsuarioToOrganizacion(data.organizacion as string, usuario._id);
+                }
+            }
+            if (newOrg === '') {
+                data.organizacion = null as any;
+            }
         }
 
         usuario.set(data);
