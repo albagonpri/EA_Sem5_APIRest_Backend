@@ -8,6 +8,7 @@ import organizacionRoutes from './routes/Organizacion';
 import usuarioRoutes from './routes/Usuario';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './swagger';
+import actividadRoutes from './routes/Actividad';
 
 const router = express();
 
@@ -39,6 +40,7 @@ const StartServer = () => {
 
     router.use(express.urlencoded({ extended: true }));
     router.use(express.json());
+    router.use('/actividades', actividadRoutes);
 
     /** Rules of our API */
     router.use(cors());
